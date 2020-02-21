@@ -15,5 +15,5 @@ Create "bot.prod.json" file at root of project with content:
 npm start
 ```
 
-## Usage 😍🤖
+## Usage 🐱‍🏍🤖
 Use textual command "/help".
