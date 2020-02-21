@@ -34,7 +34,7 @@ export class Bot implements IBot {
         this._client.on('ready', () => {
             this._botId = this._client.user.id
             if (this._config.game) {
-                this._client.user.setGame(this._config.game)
+                this._client.user.setActivity(this._config.game)
             }
             if (this._config.username && this._client.user.username !== this._config.username) {
                 this._client.user.setUsername(this._config.username)
