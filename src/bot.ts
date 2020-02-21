@@ -74,18 +74,15 @@ export class Bot implements IBot {
 
         // Message Welcome
         this._client.on('guildMemberAdd', (member) => {
-            this._logger.info(`nuovo utente entrato`)
-            const channel = this._client.channels.get('642399832572428288') as discord.TextChannel
-            this._iuser.id = member.user.id
-            this._iuser.username = member.user.username
-            this._iuser.tag = member.user.tag
-            this._iuser.discriminator = member.user.discriminator
-            const answer = new BotMessage(this._iuser)
-            answer.setTitle('')
+            const channel = this._client.channels.get('642387718164316174') as discord.TextChannel
+            const answer = new BotMessage(member.user)
+            answer.setTitle('Benvento!')
             answer.setColor('RANDOM')
             answer.setThumbnail('https://media1.tenor.com/images/0edd53dd2110147b786329c2e24fb1d0/tenor.gif')
-            answer.setTextOnly('Ciao, benvenuto nel gruppo Developer Italia! Ti invito a leggere il regolamento.')
-            channel.send(answer)
+            answer.setDescription('Ciao ' + member + ', questo è il gruppo Developer Italia! Ti invito a leggere il <#642394931851427846>.')
+            if (answer.isValid()) {
+                channel.send({ embed: answer.richText })
+            }
         })
 
         this._client.login(this._config.token)
