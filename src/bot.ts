@@ -14,11 +14,11 @@ export class Bot implements IBot {
     public get onlineUsers() { return this.allUsers.filter((i) => i.presence.status !== 'offline') }
 
     private readonly _commands: IBotCommand[] = []
-    private _client: discord.Client
-    private _config: IBotConfig
-    private _logger: ILogger
-    private _iuser: IUser
-    private _botId: string
+    private _client!: discord.Client
+    private _config!: IBotConfig
+    private _logger!: ILogger
+    private _iuser!: IUser
+    private _botId!: string
 
     public start(logger: ILogger, config: IBotConfig, commandsPath: string, dataPath: string) {
         this._logger = logger

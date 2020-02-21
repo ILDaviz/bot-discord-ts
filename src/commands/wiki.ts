@@ -8,7 +8,7 @@ export default class WikiCommand implements IBotCommand {
     private readonly API_URL = '.wikipedia.org/w/api.php?action=query&prop=info&inprop=url&format=json&titles='
     private readonly CMD_REGEXP = /^\/(wiki|w)(?: |$)/im
     private readonly TIMEOUT = 5000
-    private _bot: IBot
+    private _bot!: IBot
 
     public getHelp(): IBotCommandHelp {
         return {

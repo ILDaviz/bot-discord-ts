@@ -12,7 +12,7 @@ export default class ComicsCommand implements IBotCommand {
     private readonly CMD_REGEXP = /^\/(comics)(?: |$)/im
     private readonly API_URL = 'https://xkcd.com/info.0.json'
     private readonly TIMEOUT = 5000
-    private _bot: IBot
+    private _bot!: IBot
 
     public getHelp(): IBotCommandHelp {
         return { caption: '/comics', description: 'Fumetto casuale da xkcd.com.' }
