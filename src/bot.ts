@@ -30,7 +30,7 @@ export class Bot implements IBot {
 
         this._client = new discord.Client()
 
-        //Message ready bot
+        // Message ready bot
         this._client.on('ready', () => {
             this._botId = this._client.user.id
             if (this._config.game) {
@@ -43,7 +43,7 @@ export class Bot implements IBot {
             this._logger.info('started...')
         })
 
-        //Read command
+        // Read command
         this._client.on('message', async (message) => {
             if (message.author.id !== this._botId) {
                 const text = message.cleanContent
@@ -72,10 +72,11 @@ export class Bot implements IBot {
             }
         })
 
-        //Message Welcome
+        // Message Welcome
         this._client.on('guildMemberAdd', (member) => {
+            this._logger.info(`nuovo utente entrato`)
             const channel = this._client.channels.get('642399832572428288') as discord.TextChannel
-            this._iuser.id = member.id
+            this._iuser.id = member.user.id
             this._iuser.username = member.user.username
             this._iuser.tag = member.user.tag
             this._iuser.discriminator = member.user.discriminator
