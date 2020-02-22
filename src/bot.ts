@@ -19,12 +19,15 @@ export class Bot implements IBot {
     private _logger!: ILogger
     private _iuser!: IUser
     private _botId!: string
+    private _langs!: {}
 
     public start(logger: ILogger, config: IBotConfig, commandsPath: string, dataPath: string) {
         this._logger = logger
         this._config = config
 
         this.loadCommands(commandsPath, dataPath)
+
+        this._logger.debug(this._langs)
 
         if (!this._config.token) { throw new Error('invalid discord token') }
 
