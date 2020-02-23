@@ -31,7 +31,6 @@ export class Bot implements IBot {
 
         this._client = new discord.Client()
 
-
         // Message ready bot
         this._client.on('ready', () => {
 
@@ -103,5 +102,7 @@ export class Bot implements IBot {
             this._commands.push(command)
             this._logger.info(`command "${cmdName}" loaded...`)
         }
+
+        this._logger.info(this._commands)
     }
 }
