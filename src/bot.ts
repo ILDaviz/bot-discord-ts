@@ -26,6 +26,7 @@ export class Bot implements IBot {
         this._config = config
 
         this.loadCommands(commandsPath, dataPath)
+        this.loadLangs()
 
         this._logger.debug(this._langs)
 
@@ -89,6 +90,16 @@ export class Bot implements IBot {
         })
 
         this._client.login(this._config.token)
+    }
+
+    private loadLangs() {
+        const localsLangs = require('../lang/langs.json')
+        this._langs = localsLangs.langs.map((lang: string) => {
+            return {
+                code: lang,
+                ...require(`../lang/${lang}.json`)
+            }
+        }).sort((a: any, b: any) => (a.name > b.name ? 1 : -1))
     }
 
     private loadCommands(commandsPath: string, dataPath: string) {
