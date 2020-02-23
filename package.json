@@ -12,7 +12,7 @@
     "author": "ILDaviz <david_ev@icloud.com> (https://github.com/ILDaviz)",
     "repository": {
         "type": "git",
-        "url": ""
+        "url": "https://github.com/ILDaviz/bot-discord-ts"
     },
     "license": "MIT",
     "devDependencies": {

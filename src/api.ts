@@ -11,6 +11,7 @@ export interface ILogger {
 }
 
 export interface IBotConfig {
+    prefix: string
     token: string
     commands: string[]
     game?: string
@@ -24,19 +25,24 @@ export interface IBotCommandHelp {
     description: string
 }
 
+export interface ILangs {
+    readonly logger: ILogger
+}
+
 export interface IBot {
     readonly commands: IBotCommand[]
     readonly logger: ILogger
+    readonly config: IBotConfig
     readonly allUsers: IUser[]
     readonly onlineUsers: IUser[]
     start(logger: ILogger, config: IBotConfig, commandsPath: string, dataPath: string): void
 }
 
 export interface IBotCommand {
-    getHelp(): IBotCommandHelp
+    getHelp(prefix: string): IBotCommandHelp
     init(bot: IBot, dataPath: string): void
     isValid(msg: string): boolean
-    process(msg: string, answer: IBotMessage): Promise<void>
+    process(prefix: string, msg: string, answer: IBotMessage): Promise<void>
 }
 
 export interface IUser {

@@ -2,6 +2,7 @@ import * as discord from 'discord.js'
 import { RichEmbed } from 'discord.js'
 import * as path from 'path'
 import { IBot, IBotCommand, IBotConfig, ILogger, IUser } from './api'
+import { Langs } from './langs'
 import { BotMessage } from './message'
 
 export class Bot implements IBot {
@@ -13,13 +14,14 @@ export class Bot implements IBot {
 
     public get onlineUsers() { return this.allUsers.filter((i) => i.presence.status !== 'offline') }
 
+    public get config() { return this._config }
+
     private readonly _commands: IBotCommand[] = []
     private _client!: discord.Client
     private _config!: IBotConfig
     private _logger!: ILogger
     private _iuser!: IUser
     private _botId!: string
-    private _langs!: {}
 
     public start(logger: ILogger, config: IBotConfig, commandsPath: string, dataPath: string) {
         this._logger = logger
@@ -27,14 +29,13 @@ export class Bot implements IBot {
 
         this.loadCommands(commandsPath, dataPath)
 
-        this._logger.debug(this._langs)
-
         if (!this._config.token) { throw new Error('invalid discord token') }
 
         this._client = new discord.Client()
 
         // Message ready bot
         this._client.on('ready', () => {
+
             this._botId = this._client.user.id
             if (this._config.game) {
                 this._client.user.setActivity(this._config.game)
@@ -49,14 +50,22 @@ export class Bot implements IBot {
         // Read command
         this._client.on('message', async (message) => {
             if (message.author.id !== this._botId) {
+                // Get cmd prefix on db
+                const _message = message
                 const text = message.cleanContent
+                const prefix = this.getPrefix() // Add discord message method
                 this._logger.debug(`[${message.author.tag}] ${text}`)
+                // Check prefix
+                if (message.content[0] !== prefix) {
+                    return
+                }
+                const _text = message.content.substr(1, message.content.length).toLowerCase()
                 for (const cmd of this._commands) {
                     try {
-                        if (cmd.isValid(text)) {
+                        if (cmd.isValid(_text)) {
                             const answer = new BotMessage(message.author)
                             if (!this._config.idiots || !this._config.idiots.includes(message.author.id)) {
-                                await cmd.process(text, answer)
+                                await cmd.process(prefix, _text, answer)
                             } else {
                                 if (this._config.idiotAnswer) {
                                     answer.setTextOnly(this._config.idiotAnswer)
@@ -91,6 +100,11 @@ export class Bot implements IBot {
         this._client.login(this._config.token)
     }
 
+    private getPrefix(): string {
+        return this._config.prefix
+    }
+
+    // Load Comments
     private loadCommands(commandsPath: string, dataPath: string) {
         if (!this._config.commands || !Array.isArray(this._config.commands) || this._config.commands.length === 0) {
             throw new Error('Invalid / empty commands list')

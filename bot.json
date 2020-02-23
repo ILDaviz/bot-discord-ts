@@ -3,6 +3,7 @@
     "commands": [
         ""
     ],
+    "prefix": "/",
     "token": "",
     "idiots": [],
     "idiotAnswer": ""
