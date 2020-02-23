@@ -91,7 +91,7 @@ export class Bot implements IBot {
 
         this._client.login(this._config.token)
     }
-
+    // Load multilang from json
     private loadLangs() {
         const localsLangs = require('../lang/langs.json')
         this._langs = localsLangs.langs.map((lang: string) => {
@@ -102,6 +102,7 @@ export class Bot implements IBot {
         }).sort((a: any, b: any) => (a.name > b.name ? 1 : -1))
     }
 
+    // Load Comments
     private loadCommands(commandsPath: string, dataPath: string) {
         if (!this._config.commands || !Array.isArray(this._config.commands) || this._config.commands.length === 0) {
             throw new Error('Invalid / empty commands list')
