@@ -14,6 +14,8 @@ export class Bot implements IBot {
 
     public get onlineUsers() { return this.allUsers.filter((i) => i.presence.status !== 'offline') }
 
+    public get config() { return this._config }
+
     private readonly _commands: IBotCommand[] = []
     private _client!: discord.Client
     private _config!: IBotConfig
@@ -48,11 +50,13 @@ export class Bot implements IBot {
         // Read command
         this._client.on('message', async (message) => {
             if (message.author.id !== this._botId) {
+                // Get cmd prefix on db
                 const text = message.cleanContent
                 this._logger.debug(`[${message.author.tag}] ${text}`)
                 for (const cmd of this._commands) {
+                    console.log(cmd)
                     try {
-                        if (cmd.isValid(text)) {
+                        if (cmd.isValid(this._config.prefix, text)) {
                             const answer = new BotMessage(message.author)
                             if (!this._config.idiots || !this._config.idiots.includes(message.author.id)) {
                                 await cmd.process(text, answer)

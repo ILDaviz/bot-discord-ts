@@ -3,7 +3,7 @@
     "commands": [
         ""
     ],
-    "botcmd": "/",
+    "prefix": "/",
     "token": "",
     "idiots": [],
     "idiotAnswer": ""

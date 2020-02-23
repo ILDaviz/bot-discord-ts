@@ -12,7 +12,7 @@ export default class HelpCommand implements IBotCommand {
         this._bot = bot
     }
 
-    public isValid(msg: string): boolean {
+    public isValid(prefix: string, msg: string): boolean {
         return this.CMD_REGEXP.test(msg)
     }
 
