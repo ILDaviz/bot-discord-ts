@@ -51,15 +51,21 @@ export class Bot implements IBot {
         this._client.on('message', async (message) => {
             if (message.author.id !== this._botId) {
                 // Get cmd prefix on db
+                const _message = message
                 const text = message.cleanContent
+                const prefix = this.getPrefix() // Add discord message method
                 this._logger.debug(`[${message.author.tag}] ${text}`)
+                // Check prefix
+                if (message.content[0] !== prefix) {
+                    return
+                }
+                const _text = message.content.substr(1, message.content.length).toLowerCase()
                 for (const cmd of this._commands) {
-                    console.log(cmd)
                     try {
-                        if (cmd.isValid(this._config.prefix, text)) {
+                        if (cmd.isValid(_text)) {
                             const answer = new BotMessage(message.author)
                             if (!this._config.idiots || !this._config.idiots.includes(message.author.id)) {
-                                await cmd.process(text, answer)
+                                await cmd.process(prefix, _text, answer)
                             } else {
                                 if (this._config.idiotAnswer) {
                                     answer.setTextOnly(this._config.idiotAnswer)
@@ -94,6 +100,10 @@ export class Bot implements IBot {
         this._client.login(this._config.token)
     }
 
+    private getPrefix(): string {
+        return this._config.prefix
+    }
+
     // Load Comments
     private loadCommands(commandsPath: string, dataPath: string) {
         if (!this._config.commands || !Array.isArray(this._config.commands) || this._config.commands.length === 0) {
@@ -106,7 +116,5 @@ export class Bot implements IBot {
             this._commands.push(command)
             this._logger.info(`command "${cmdName}" loaded...`)
         }
-
-        this._logger.info(this._commands)
     }
 }

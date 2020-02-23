@@ -39,10 +39,10 @@ export interface IBot {
 }
 
 export interface IBotCommand {
-    getHelp(): IBotCommandHelp
+    getHelp(prefix: string): IBotCommandHelp
     init(bot: IBot, dataPath: string): void
-    isValid(prefix: string, msg: string): boolean
-    process(msg: string, answer: IBotMessage): Promise<void>
+    isValid(msg: string): boolean
+    process(prefix: string, msg: string, answer: IBotMessage): Promise<void>
 }
 
 export interface IUser {
