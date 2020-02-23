@@ -24,6 +24,10 @@ export interface IBotCommandHelp {
     description: string
 }
 
+export interface ILangs {
+    readonly logger: ILogger
+}
+
 export interface IBot {
     readonly commands: IBotCommand[]
     readonly logger: ILogger

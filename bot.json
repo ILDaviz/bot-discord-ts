@@ -3,6 +3,7 @@
     "commands": [
         ""
     ],
+    "botcmd": "?",
     "token": "",
     "idiots": [],
     "idiotAnswer": ""

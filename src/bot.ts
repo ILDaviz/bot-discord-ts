@@ -2,6 +2,7 @@ import * as discord from 'discord.js'
 import { RichEmbed } from 'discord.js'
 import * as path from 'path'
 import { IBot, IBotCommand, IBotConfig, ILogger, IUser } from './api'
+import { Langs } from './langs'
 import { BotMessage } from './message'
 
 export class Bot implements IBot {
@@ -19,23 +20,21 @@ export class Bot implements IBot {
     private _logger!: ILogger
     private _iuser!: IUser
     private _botId!: string
-    private _langs!: {}
 
     public start(logger: ILogger, config: IBotConfig, commandsPath: string, dataPath: string) {
         this._logger = logger
         this._config = config
 
         this.loadCommands(commandsPath, dataPath)
-        this.loadLangs()
-
-        this._logger.debug(this._langs)
 
         if (!this._config.token) { throw new Error('invalid discord token') }
 
         this._client = new discord.Client()
 
+
         // Message ready bot
         this._client.on('ready', () => {
+
             this._botId = this._client.user.id
             if (this._config.game) {
                 this._client.user.setActivity(this._config.game)
@@ -90,16 +89,6 @@ export class Bot implements IBot {
         })
 
         this._client.login(this._config.token)
-    }
-    // Load multilang from json
-    private loadLangs() {
-        const localsLangs = require('../lang/langs.json')
-        this._langs = localsLangs.langs.map((lang: string) => {
-            return {
-                code: lang,
-                ...require(`../lang/${lang}.json`)
-            }
-        }).sort((a: any, b: any) => (a.name > b.name ? 1 : -1))
     }
 
     // Load Comments
