@@ -12,8 +12,11 @@ export class Database implements IDatabase {
     private _logger: ILogger = console
     private _db!: JsonDB
 
+    /**
+     * @param database Name of database
+     */
     constructor(database: string) {
-        this.initDB(database)
+        this.initDB('../database/' + database + '.json')
     }
 
     /**
