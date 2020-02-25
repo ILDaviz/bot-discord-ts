@@ -6,7 +6,14 @@ npm run build
 Create "bot.prod.json" file at root of project with content:
 ```
 {
-    "token" : "YOUR DISCORD TOKEN HERE"
+    "game": "NAME DISPLAY PLAY GAME",
+    "commands": [
+        ""
+    ],
+    "prefix": "STANDARD PREFIX",
+    "token": "YOUR DISCORD TOKEN HERE",
+    "idiots": [],
+    "idiotAnswer": ""
 }
 ```
 
