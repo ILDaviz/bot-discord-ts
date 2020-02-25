@@ -3,11 +3,14 @@
 npm install
 npm run build
 ```
-Create "bot.prod.json" file and "database" folder at root of project with content:
+Create "bot.prod.json" file at root of project with content:
 ```
 {
     "token" : "YOUR DISCORD TOKEN HERE"
 }
+```
+
+Create folder "database"
 ```
 
 ## Start
