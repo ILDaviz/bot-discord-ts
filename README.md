@@ -17,8 +17,6 @@ Create "bot.prod.json" file at root of project with content:
 }
 ```
 
-Create empty folder "database"
-
 ## Start
 ```
 npm start

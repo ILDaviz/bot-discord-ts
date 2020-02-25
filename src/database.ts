@@ -1,3 +1,4 @@
+import * as fs from 'fs'
 import { JsonDB } from 'node-json-db'
 import { Config } from 'node-json-db/dist/lib/JsonDBConfig'
 import { IDatabase, ILogger } from './api'
@@ -16,6 +17,11 @@ export class Database implements IDatabase {
      * @param database Name of database
      */
     constructor(database: string) {
+        // Create folder
+        if (!fs.existsSync('../database/')) {
+            fs.mkdirSync('../database')
+        }
+        // Init db
         this.initDB('../database/' + database + '.json')
     }
 
