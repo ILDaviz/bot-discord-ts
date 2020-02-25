@@ -29,6 +29,14 @@ export interface ILangs {
     readonly logger: ILogger
 }
 
+export interface IDatabase {
+    readonly logger: ILogger
+    pushData(dataPatch: string, data: any, override: boolean): void
+    getData(dataPatch: string): any
+    deleteData(dataPatch: string): void
+    existData(dataPatch: string): boolean
+}
+
 export interface IBot {
     readonly commands: IBotCommand[]
     readonly logger: ILogger
