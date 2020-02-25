@@ -10,8 +10,7 @@ Create "bot.prod.json" file at root of project with content:
 }
 ```
 
-Create folder "database"
-```
+Create empty folder "database"
 
 ## Start
 ```
