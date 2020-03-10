@@ -17,19 +17,14 @@ export class Database implements IDatabase {
      * @param database Name of database
      */
     constructor(database: string) {
-        // Create folder
-        if (!fs.existsSync('../database/')) {
-            fs.mkdirSync('../database')
-        }
         // Init db
-        this.initDB('../database/' + database + '.json')
+        this.initDB('database/' + database + '')
     }
 
     /**
      * pushData
      */
     public pushData(dataPatch: string, data: any, override: boolean) {
-        this._db.push(dataPatch, data, override)
         try {
             this._db.push(dataPatch, data, override)
         } catch (error) {
