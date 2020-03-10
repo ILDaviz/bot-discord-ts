@@ -2,7 +2,6 @@ import * as discord from 'discord.js'
 import { RichEmbed } from 'discord.js'
 import * as path from 'path'
 import { IBot, IBotCommand, IBotConfig, ILogger, IUser } from './api'
-import { Database } from './database'
 import { Langs } from './langs'
 import { BotMessage } from './message'
 
@@ -24,7 +23,6 @@ export class Bot implements IBot {
     private _iuser!: IUser
     private _botId!: string
     private _dbRef!: string
-    private _db!: Database
 
     public start(logger: ILogger, config: IBotConfig, commandsPath: string, dataPath: string) {
         this._logger = logger
