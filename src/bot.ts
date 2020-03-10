@@ -65,13 +65,7 @@ export class Bot implements IBot {
                     try {
                         if (cmd.isValid(_text)) {
                             const answer = new BotMessage(message.author)
-                            if (!this._config.idiots || !this._config.idiots.includes(message.author.id)) {
-                                await cmd.process(prefix, _text, answer)
-                            } else {
-                                if (this._config.idiotAnswer) {
-                                    answer.setTextOnly(this._config.idiotAnswer)
-                                }
-                            }
+                            await cmd.process(prefix, _text, answer)
                             if (answer.isValid()) {
                                 message.reply(answer.text || { embed: answer.richText })
                             }

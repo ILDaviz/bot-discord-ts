@@ -11,9 +11,7 @@ Create "bot.prod.json" file at root of project with content:
         ""
     ],
     "prefix": "STANDARD PREFIX",
-    "token": "YOUR DISCORD TOKEN HERE",
-    "idiots": [],
-    "idiotAnswer": ""
+    "token": "YOUR DISCORD TOKEN HERE"
 }
 ```
 
