@@ -5,6 +5,5 @@
     ],
     "prefix": "/",
     "token": "",
-    "idiots": [],
-    "idiotAnswer": ""
+    "mongo_uri": ""
 }

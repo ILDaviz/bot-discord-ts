@@ -22,7 +22,6 @@ export class Bot implements IBot {
     private _logger!: ILogger
     private _iuser!: IUser
     private _botId!: string
-    private _dbRef!: string
 
     public start(logger: ILogger, config: IBotConfig, commandsPath: string, dataPath: string) {
         this._logger = logger
