@@ -1,4 +1,4 @@
-# Typescript discord bot. Developers Italia 🤖🤘 https://discord.gg/vsaVBDg
+# Typescript discord bot. LadyIsabel
 ```
 npm install
 npm run build
