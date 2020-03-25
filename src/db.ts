@@ -1,5 +1,5 @@
 import mongodb from 'mongodb'
-import { ILogger } from './src/api'
+import { ILogger } from './api'
 
 export class DataBase {
 
