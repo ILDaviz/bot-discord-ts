@@ -32,6 +32,10 @@ export interface IBot {
     start(logger: ILogger, config: IBotConfig, commandsPath: string, dataPath: string): void
 }
 
+export interface ILangs{
+    readonly logger: ILogger
+}
+
 export interface IBotCommand {
     getHelp(): IBotCommandHelp
     init(bot: IBot, dataPath: string): void
