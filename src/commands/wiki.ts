@@ -6,13 +6,13 @@ interface IWikiList { [key: string]: { fullurl: string } }
 
 export default class WikiCommand implements IBotCommand {
     private readonly API_URL = '.wikipedia.org/w/api.php?action=query&prop=info&inprop=url&format=json&titles='
-    private readonly CMD_REGEXP = /^(wiki|w)(?: |$)/im
+    private readonly CMD_REGEXP = /^\/(wiki|w)(?: |$)/im
     private readonly TIMEOUT = 5000
-    private _bot!: IBot
+    private _bot: IBot
 
-    public getHelp(prefix: string): IBotCommandHelp {
+    public getHelp(): IBotCommandHelp {
         return {
-            caption: prefix + 'wiki ' + prefix + 'w {parola chiave}',
+            caption: '/wiki /w {parola chiave}',
             description: 'Ricerca Wikipedia: /wiki /w - in italiano.'
         }
     }
@@ -25,7 +25,7 @@ export default class WikiCommand implements IBotCommand {
         return this.CMD_REGEXP.test(msg)
     }
 
-    public async process(prefix: string, msg: string, answer: IBotMessage): Promise<void> {
+    public async process(msg: string, answer: IBotMessage): Promise<void> {
         const matches = msg.match(this.CMD_REGEXP)!
         const keywords = msg.substr(matches[0].length).trim()
         if (!keywords) {

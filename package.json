@@ -12,7 +12,7 @@
     "author": "ILDaviz <david_ev@icloud.com> (https://github.com/ILDaviz)",
     "repository": {
         "type": "git",
-        "url": "https://github.com/ILDaviz/bot-discord-ts"
+        "url": ""
     },
     "license": "MIT",
     "devDependencies": {
@@ -23,13 +23,8 @@
         "typescript": "^2.6.2"
     },
     "dependencies": {
-        "@types/lowdb": "^1.0.9",
-        "@types/node-json-db": "^0.9.3",
         "cheerio": "^1.0.0-rc.2",
         "discord.js": "^11.2.1",
-        "lowdb": "^1.0.0",
-        "node-fetch": "^1.7.3",
-        "node-json-db": "^1.0.3",
-        "simple-json-db": "^1.2.2"
+        "node-fetch": "^1.7.3"
     }
 }

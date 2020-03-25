@@ -1,4 +1,4 @@
-# Typescript discord bot. Developers Italia 🤖🤘 https://discord.gg/vsaVBDg
+# Typescript discord bot. Developers Italia 🤖🤘 https://discord.gg/mcvk7r
 ```
 npm install
 npm run build
@@ -6,12 +6,7 @@ npm run build
 Create "bot.prod.json" file at root of project with content:
 ```
 {
-    "game": "NAME DISPLAY PLAY GAME",
-    "commands": [
-        ""
-    ],
-    "prefix": "STANDARD PREFIX",
-    "token": "YOUR DISCORD TOKEN HERE"
+    "token" : "YOUR DISCORD TOKEN HERE"
 }
 ```
 
@@ -20,5 +15,5 @@ Create "bot.prod.json" file at root of project with content:
 npm start
 ```
 
-## Usage 🐱‍🏍🤖
+## Usage 😍🤖
 Use textual command "/help".

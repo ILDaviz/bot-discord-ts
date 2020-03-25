@@ -1,6 +1,5 @@
 dist
 node_modules
-database
 old_bot
 bot.prod.json
 .vscode
