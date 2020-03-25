@@ -1,5 +1,5 @@
 import mongodb from 'mongodb'
-import { ILogger } from './api'
+import { ILogger } from './src/api'
 
 export class DataBase {
 
@@ -19,13 +19,9 @@ export class DataBase {
 
         try {
             this._client = await mongodb.MongoClient.connect(this._mongodb, { useNewUrlParser: true })
+            this._db = this._client.db()
         } catch (error) {
             this.logger.error('no connection to database')
-        }
-
-        if (this._client) {
-            this._db = this._client.db()
-            return true
         }
     }
 

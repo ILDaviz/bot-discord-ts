@@ -19,15 +19,12 @@
         "@types/cheerio": "^0.22.6",
         "@types/node": "^8.5.2",
         "@types/node-fetch": "^1.6.7",
-        "@types/mongodb": "^3.3.12",
         "tslint": "^5.8.0",
         "typescript": "^2.6.2"
     },
     "dependencies": {
         "@types/lowdb": "^1.0.9",
         "@types/node-json-db": "^0.9.3",
-        "@types/mongodb": "^3.3.12",
-        "mongodb": "^3.4.0",
         "cheerio": "^1.0.0-rc.2",
         "discord.js": "^11.2.1",
         "lowdb": "^1.0.0",
