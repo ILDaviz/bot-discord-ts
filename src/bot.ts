@@ -2,6 +2,7 @@ import * as discord from 'discord.js'
 import { RichEmbed } from 'discord.js'
 import * as path from 'path'
 import { IBot, IBotCommand, IBotConfig, ILogger, IUser } from './api'
+import { Langs } from './langs'
 import { BotMessage } from './message'
 
 export class Bot implements IBot {
