@@ -14,11 +14,11 @@ export class Bot implements IBot {
     public get onlineUsers() { return this.allUsers.filter((i) => i.presence.status !== 'offline') }
 
     private readonly _commands: IBotCommand[] = []
-    private _client: discord.Client
-    private _config: IBotConfig
-    private _logger: ILogger
-    private _iuser: IUser
-    private _botId: string
+    private _client!: discord.Client
+    private _config!: IBotConfig
+    private _logger!: ILogger
+    private _iuser!: IUser
+    private _botId!: string
 
     public start(logger: ILogger, config: IBotConfig, commandsPath: string, dataPath: string) {
         this._logger = logger
@@ -30,7 +30,7 @@ export class Bot implements IBot {
 
         this._client = new discord.Client()
 
-        //Message ready bot
+        // Message ready bot
         this._client.on('ready', () => {
             this._botId = this._client.user.id
             if (this._config.game) {
@@ -43,7 +43,7 @@ export class Bot implements IBot {
             this._logger.info('started...')
         })
 
-        //Read command
+        // Read command
         this._client.on('message', async (message) => {
             if (message.author.id !== this._botId) {
                 const text = message.cleanContent
@@ -72,7 +72,7 @@ export class Bot implements IBot {
             }
         })
 
-        //Message Welcome
+        // Message Welcome
         this._client.on('guildMemberAdd', (member) => {
             const channel = this._client.channels.get('642399832572428288') as discord.TextChannel
             this._iuser.id = member.id

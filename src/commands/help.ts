@@ -2,7 +2,7 @@ import { IBot, IBotCommand, IBotCommandHelp, IBotMessage } from '../api'
 
 export default class HelpCommand implements IBotCommand {
     private readonly CMD_REGEXP = /^\/(help)(?: |$)/im
-    private _bot: IBot
+    private _bot!: IBot
 
     public getHelp(): IBotCommandHelp {
         return { caption: '/help', description: 'Per richiedere aiuto' }
