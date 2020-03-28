@@ -1,10 +1,11 @@
 import * as discord from 'discord.js'
-import { RichEmbed } from 'discord.js'
 import * as path from 'path'
 import { IBot, IBotCommand, IBotConfig, ILogger, IUser } from './api'
+import { MongoHelper } from './db'
 import { BotMessage } from './message'
 
 export class Bot implements IBot {
+
     public get commands(): IBotCommand[] { return this._commands }
 
     public get logger() { return this._logger }
@@ -23,7 +24,9 @@ export class Bot implements IBot {
     public start(logger: ILogger, config: IBotConfig, commandsPath: string, dataPath: string) {
         this._logger = logger
         this._config = config
-
+        // Load Database
+        this.connectDatabase()
+        // Load Command
         this.loadCommands(commandsPath, dataPath)
 
         if (!this._config.token) { throw new Error('invalid discord token') }
@@ -34,7 +37,7 @@ export class Bot implements IBot {
         this._client.on('ready', () => {
             this._botId = this._client.user.id
             if (this._config.game) {
-                this._client.user.setGame(this._config.game)
+                this._client.user.setActivity(this._config.game)
             }
             if (this._config.username && this._client.user.username !== this._config.username) {
                 this._client.user.setUsername(this._config.username)
@@ -100,6 +103,19 @@ export class Bot implements IBot {
             command.init(this, path.resolve(`${dataPath}/${cmdName}`))
             this._commands.push(command)
             this._logger.info(`command "${cmdName}" loaded...`)
+        }
+    }
+
+    private async connectDatabase() {
+        if (this._config.mongo_url) {
+            try {
+                await MongoHelper.connect(this._config.mongo_url)
+                this._logger.info(`Connected to Mongo!`)
+            } catch (err) {
+                this._logger.info(`Unable to connect to Mongo! "${err}"`)
+            }
+        } else {
+            this._logger.info(`Error no url mongodb`)
         }
     }
 }

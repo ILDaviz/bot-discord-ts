@@ -17,6 +17,7 @@ export interface IBotConfig {
     username?: string
     idiots?: string[]
     idiotAnswer?: string
+    mongo_url?: string
 }
 
 export interface IBotCommandHelp {
