@@ -18,7 +18,6 @@ export class Bot implements IBot {
     private _client!: discord.Client
     private _config!: IBotConfig
     private _logger!: ILogger
-    private _iuser!: IUser
     private _botId!: string
 
     public start(logger: ILogger, config: IBotConfig, commandsPath: string, dataPath: string) {
@@ -77,17 +76,18 @@ export class Bot implements IBot {
 
         // Message Welcome
         this._client.on('guildMemberAdd', (member) => {
-            const channel = this._client.channels.get('642399832572428288') as discord.TextChannel
-            this._iuser.id = member.id
-            this._iuser.username = member.user.username
-            this._iuser.tag = member.user.tag
-            this._iuser.discriminator = member.user.discriminator
-            const answer = new BotMessage(this._iuser)
-            answer.setTitle('')
+
+            if (!this._config.welcome_id) { throw new Error('Error missing welcome chanel') }
+
+            const channel = this._client.channels.get(this._config.welcome_id) as discord.TextChannel
+            const answer = new BotMessage(member.user)
+            answer.setTitle('Benvenuto!')
             answer.setColor('RANDOM')
             answer.setThumbnail('https://media1.tenor.com/images/0edd53dd2110147b786329c2e24fb1d0/tenor.gif')
-            answer.setTextOnly('Ciao, benvenuto nel gruppo Developer Italia! Ti invito a leggere il regolamento.')
-            channel.send(answer)
+            answer.setDescription('Ciao ' + member + ', questo è un messaggio di benvenuto')
+            if (answer.isValid()) {
+                channel.send({ embed: answer.richText })
+            }
         })
 
         this._client.login(this._config.token)
